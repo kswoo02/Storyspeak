@@ -2,6 +2,7 @@ package com.example.storyspeak.controller;
 
 import com.example.storyspeak.domain.QuizQuestion;
 import com.example.storyspeak.service.QuizService;
+import com.example.storyspeak.service.VocabularyService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.util.List;
 public class QuizController {
 
     private final QuizService quizService;
+    private final VocabularyService vocabularyService;
 
     /**
      * Create a new quiz from the provided story content.  The quiz is
@@ -109,5 +111,13 @@ public class QuizController {
         List<QuizQuestion> incorrectWords = (List<QuizQuestion>) session.getAttribute("incorrectWords");
         model.addAttribute("incorrectWords", incorrectWords);
         return "result";
+    }
+
+    @PostMapping("/quiz/addVocabulary")
+    public String addVocabularyFromQuiz(@RequestParam("selectedWords") List<String> selectedWords) {
+        for (String word : selectedWords) {
+            vocabularyService.getMeaningAndSaveWord(word);
+        }
+        return "redirect:/vocabulary";
     }
 }

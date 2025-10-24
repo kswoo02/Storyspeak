@@ -32,7 +32,11 @@ public class VocabularyService {
         String meaning = openAIService.chat(systemPrompt, userPrompt);
 
         // Save the new word and its meaning
-        Vocabulary newVocabulary = new Vocabulary(word, meaning);
+        Vocabulary newVocabulary = new Vocabulary(null, word, meaning, "");
         return vocabularyRepository.save(newVocabulary);
+    }
+
+    public void deleteWordById(Long id) {
+        vocabularyRepository.deleteById(id);
     }
 }

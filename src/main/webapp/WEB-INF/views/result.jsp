@@ -86,23 +86,35 @@
         <p>퀴즈를 풀지 않았습니다.</p>
     </c:if>
 
-    <c:if test="${not empty correctWords}">
-        <p>다음 단어를 맞추셨습니다:</p>
-        <ul>
-            <c:forEach var="word" items="${correctWords}">
-                <li>${word}</li>
-            </c:forEach>
-        </ul>
-    </c:if>
+    <form action="/quiz/addVocabulary" method="post">
+        <c:if test="${not empty correctWords}">
+            <p>다음 단어를 맞추셨습니다:</p>
+            <ul>
+                <c:forEach var="word" items="${correctWords}">
+                    <li>
+                        <input type="checkbox" name="selectedWords" value="${word}" id="word-${word}">
+                        <label for="word-${word}">${word}</label>
+                    </li>
+                </c:forEach>
+            </ul>
+        </c:if>
 
-    <c:if test="${not empty incorrectWords}">
-        <p>다음 단어를 틀리셨습니다:</p>
-        <ul>
-            <c:forEach var="question" items="${incorrectWords}">
-                <li class="incorrect"><strong>${question.word}</strong>: ${question.correctMeaning}</li>
-            </c:forEach>
-        </ul>
-    </c:if>
+        <c:if test="${not empty incorrectWords}">
+            <p>다음 단어를 틀리셨습니다:</p>
+            <ul>
+                <c:forEach var="question" items="${incorrectWords}">
+                    <li class="incorrect">
+                        <input type="checkbox" name="selectedWords" value="${question.word}" id="question-${question.word}">
+                        <label for="question-${question.word}"><strong>${question.word}</strong>: ${question.correctMeaning}</label>
+                    </li>
+                </c:forEach>
+            </ul>
+        </c:if>
+
+        <c:if test="${not empty correctWords || not empty incorrectWords}">
+            <button type="submit">선택한 단어 단어장에 추가</button>
+        </c:if>
+    </form>
 
     <a href="/">처음으로 돌아가기</a>
 </div>
