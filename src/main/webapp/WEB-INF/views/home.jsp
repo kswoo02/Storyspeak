@@ -119,6 +119,108 @@
             flex-grow: 1;
         }
 
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .vocabulary-button {
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4);
+        }
+
+        .vocabulary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 17, 203, 0.5);
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .topics {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .topics button {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .topics button:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        input[type="text"], select {
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        button[type="submit"] {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #2ecc71, #28a745);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+            margin-top: 1rem;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .input-with-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        #custom_topic {
+            flex-grow: 1;
+        }
+
         .mic-icon {
             cursor: pointer;
             font-size: 1.5rem;
@@ -129,10 +231,15 @@
 
 <body>
 <div class="container">
-            <h1>🌟 AI 영어 동화 만들기</h1>
-            <p><a href="/vocabulary">Go to Vocabulary List</a></p>
-    
-        <form action="/story/create" method="post" accept-charset="UTF-8">        <div class="form-group">
+
+    <h1>🌟 AI 영어 동화 만들기</h1>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="/vocabulary" class="vocabulary-button">
+            단어장 보러 가기
+        </a>
+    </div>
+
+    <form action="/story/create" method="post" accept-charset="UTF-8">        <div class="form-group">
             <label>주제 선택:</label>
             <div class="topics">
                 <button type="submit" name="topic" value="용과 마법사">용과 마법사</button>

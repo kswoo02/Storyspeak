@@ -86,7 +86,7 @@
         <p>퀴즈를 풀지 않았습니다.</p>
     </c:if>
 
-    <form action="/quiz/addVocabulary" method="post">
+    <form action="/quiz/addVocabulary" method="post" onsubmit="return validateForm();">
         <c:if test="${not empty correctWords}">
             <p>다음 단어를 맞추셨습니다:</p>
             <ul>
@@ -112,11 +112,29 @@
         </c:if>
 
         <c:if test="${not empty correctWords || not empty incorrectWords}">
-            <button type="submit">선택한 단어 단어장에 추가</button>
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                <a href="/" style="padding: 1rem 2.5rem; border-radius: 25px; color: white; text-decoration: none; background: linear-gradient(45deg, #3498db, #2980b9); box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); transition: all 0.3s ease; display: inline-block;">처음으로 돌아가기</a>
+                <button type="submit" style="padding: 1rem 2.5rem; border-radius: 25px; color: white; border: none; background: linear-gradient(45deg, #2ecc71, #28a745); box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">선택한 단어 단어장에 추가</button>
+            </div>
         </c:if>
     </form>
-
-    <a href="/">처음으로 돌아가기</a>
 </div>
+<script>
+    function validateForm() {
+        const checkboxes = document.querySelectorAll('input[name="selectedWords"]');
+        let isChecked = false;
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                isChecked = true;
+                break;
+            }
+        }
+        if (!isChecked) {
+            alert('단어를 선택해주세요');
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>
