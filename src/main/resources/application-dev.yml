@@ -1,0 +1,72 @@
+server:
+  port: 8445
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: ENC(PPjeP62qhif0nQfB+6ZfnQ==)
+    key-store-type: PKCS12
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+spring:
+  config:
+    import: optional:file:.env[.properties]  # .env import
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/        # JSP 위치 (webapp/WEB-INF/views/)
+      suffix: .jsp
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/shopdb?serverTimezone=Asia/Seoul
+    username: smuser
+    password: ENC(idIWCdznEM3ggslDeTmLJw==)
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+  ai:
+    openai:
+      api-key: ENC(WXoGZ22YVZVQn3SJkBeQ9PEbH2sQMIUL885pZxObVZm7S5Rkf5bIcV/CamtRtKzh+f3UVZVxl7YW0bFjkE9jpL0gzfoWXAmx+IDjtk9YLqUyeW3Jcm+f7hKqCsyeT2VxzyLkB+KqUcWZ9BO0BETcDL0fPYrL7dfQ1MSD5D9bFrX5ICb3U4J60vapIHw6BrM0TFrpQauFPhjL6ZE6YszwGanXrQ8cayO/LLL/s2sKQKI=)
+      base-url: https://api.openai.com/v1
+      chat:
+        options:
+          model: gpt-4o
+          temperature: 0.1
+          max-tokens: 1000
+      embedding:
+        options:
+          model: text-embedding-3-small
+    vectorstore:
+      pgvector:
+        enabled: false    # ✅ PgVectorStore 비활성화 (404 방지)
+
+# 커스텀 OpenAIService (직접 REST 호출용)
+openai: # ENC(zN8LCgmXLVIud/L3pNDAt8P9sP15oU09/cd/ila+ouA+O4Z0L8CsrurxI+DqlsaOyf1kIyZa6Tpp/nC+mkPGc6EcViQHnTTdXAhVq9aNPuvgRil0Ck7owB83oQoCnKdTT08eINqY1Bq25pWoaSLonpx1WHpJubw0bxRsR4ufOEwt+sg2NvoLWMHwf1y6tp+h9cDAewZWMioZ54QxPwq2jyWOOlXo3bKPPi2CZdMJBtM=)
+  api-key: ENC(zN8LCgmXLVIud/L3pNDAt8P9sP15oU09/cd/ila+ouA+O4Z0L8CsrurxI+DqlsaOyf1kIyZa6Tpp/nC+mkPGc6EcViQHnTTdXAhVq9aNPuvgRil0Ck7owB83oQoCnKdTT08eINqY1Bq25pWoaSLonpx1WHpJubw0bxRsR4ufOEwt+sg2NvoLWMHwf1y6tp+h9cDAewZWMioZ54QxPwq2jyWOOlXo3bKPPi2CZdMJBtM=)
+  base-url: https://api.openai.com/v1
+
+mybatis:
+  type-aliases-package: edu.sm.app.dto
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+    org.springframework.ai: warn
+    com.example.storyspeak: debug
+
+app:
+  url:
+    adminserver: https://192.168.0.250:8444/
+  key:
+    skey: ${MY_KEY}
